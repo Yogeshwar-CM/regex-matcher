@@ -1,0 +1,57 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Matcher</title>
+</head>
+<body>
+    <h1>Regex Matcher</h1>
+    <form action="/results" method="post">
+        <label for="test_string">Test String:</label>
+        <input type="text" id="test_string" name="test_string" required>
+        <br>
+        <label for="regex_pattern">Regex Pattern:</label>
+        <input type="text" id="regex_pattern" name="regex_pattern" required>
+        <br>
+        <button type="submit">Match</button>
+    </form>
+    
+    {% if test_string and regex_pattern %}
+        <h2>Results:</h2>
+        <p>Test String: {{ test_string }}</p>
+        <p>Regex Pattern: {{ regex_pattern }}</p>
+        {% if matches %}
+            <ul>
+                {% for match in matches %}
+                    <li>{{ match }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No matches found.</p>
+        {% endif %}
+    {% endif %}
+    
+    <br>
+    <br>
+    
+    <h2>Validate Email</h2>
+    <form action="/validate_email" method="post">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+        <br>
+        <button type="submit">Validate</button>
+    </form>
+
+    {% if email %}
+        <h3>Email Validation Result:</h3>
+        <p>Email: {{ email }}</p>
+        {% if is_valid %}
+            <p>Valid email address.</p>
+        {% else %}
+            <p>Invalid email address.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
